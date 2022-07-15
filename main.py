@@ -53,8 +53,11 @@ class Game:
     board: List[List[CellStatus]]
     game_state: GameStatus = GameStatus.EMPTY
 
-    def __init__(self) -> None:
-        self.board = [[CellStatus.EMPTY for _ in range(3)] for __ in range(3)]
+    def __init__(self, board) -> None:
+        if not board:
+            self.board = [[CellStatus.EMPTY for _ in range(3)] for __ in range(3)]
+        else:
+            self.board = board
 
     def check_winner(self) -> None:
         utils = GameUtils()
@@ -76,5 +79,11 @@ class Game:
         self.game_state = GameStatus.NOBODY
 
 
-game = Game()
+game = Game(
+    [
+        [CellStatus.O, CellStatus.X, CellStatus.X],
+        [CellStatus.O, CellStatus.X, CellStatus.X],
+        [CellStatus.X, CellStatus.X, CellStatus.X]
+    ]
+)
 game.check_winner()
